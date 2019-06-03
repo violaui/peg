@@ -1,0 +1,32 @@
+{
+	"name": "@violaui/bow",
+	"version": "0.0.0",
+	"description": "A supplementary JavaScript code to play the Viola better.",
+	"main": "src/index.js",
+	"unpkg": "lib/index.js",
+	"scripts": {
+		"build": "babel src -d lib --delete-dir-on-start"
+	},
+	"repository": "https://github.com/violaui/bow.git",
+	"author": "amirhosseinab",
+	"license": "MIT",
+	"keywords": [
+		"JavaScript",
+		"functional-css",
+		"css-framework"
+	],
+	"files": [
+		"src",
+		"lib/index.js"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.4.4",
+		"@babel/core": "^7.4.5",
+		"@babel/plugin-proposal-object-rest-spread": "^7.4.4",
+		"@babel/preset-env": "^7.4.5",
+		"node-sass": "^4.12.0"
+	}
+}

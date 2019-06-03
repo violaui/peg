@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - 10
+before_install:
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.16.0
+  - export PATH="$HOME/.yarn/bin:$PATH"
+cache: yarn
+script:
+  - yarn run build
+deploy:
+  provider: npm
+  email: amirhosseinab@outlook.com
+  api_key:
+    secure: PPegqDPKEpUfolUz5kPdG2l6v4k0cs+TmkYs3HwlXkl0RNh7wesZ95lX7v8uS1Gg8MOQom7N7Y8ZZKNq9WYAFB9diiLmZBorZw8ch6ThOfarT7cOPeULoQuvkbZ8m3mGcD7Fx23ryzvyyYhaEFIxw52WR4Ew+3TElilQQ1JXuHDfl+DKY/87fouXZYbFMXC2UMq+f+FCjFr4Q4G4p3KhsXw4t9DmLg0B3FHyxdbJm3luRPpnyQ3MGRnzroL7dXTcVcEerK6lUKfPWEGNMgtq//Ie4hPOcDmz5hjZDnj8TF3s80GZ7BT3aV1tLQisbxJOadnfn78n9rhOmec6PLdbTxn5adGdSUxnpqh7zH5ClriWv6CneHzE2Tbx6Lx+3YUC/g54cIr59SzRYl9NmfSYI5mMSciacOv7WXjnvObdH51v7ufb5YgzDfpaZUssR/GAtkc9Q7UsqQmmcU4Srp8Vfz7jBnzOLZNbUGA8AdUwuHrGDuEA00K7l0sHU0SyoV0W3VUhk4hr1qrgFVkdI1AtpmW6mOX9yZNATUzyWU5acbC7nw6Kitqn/Hy561dhx57ZgQmmcEPInU3M2AWbvD2FkqjWZzG2GxoSCXWwnrO8flEweWhLu4842688EHQbYN1JljzouUxz/qh2QMQa5TmC0h6YP22zMd7NisWMfM+r5J4=
+  on:
+    branch: master
+  skip_cleanup: true
