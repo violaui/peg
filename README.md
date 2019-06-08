@@ -9,7 +9,6 @@
 
 A supplementary JavaScript code to play the Viola easier.
 
-
 [Version]: https://img.shields.io/npm/v/@violaui/bow.svg?&logo=npm&style=flat-square
 [Travis]: https://img.shields.io/travis/violaui/bow.svg?&logo=travis&style=flat-square
 [codecov]: https://img.shields.io/codecov/c/gh/violaui/bow.svg?label=codecov&logo=codecov&style=flat-square

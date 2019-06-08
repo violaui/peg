@@ -31,8 +31,8 @@
 		"moduleFileExtensions": [
 			"js"
 		],
-		"coveragePathIgnorePatterns": [
-			"/node_modules/"
+		"collectCoverageFrom": [
+			"./src/**/*.js"
 		]
 	},
 	"dependencies": {
