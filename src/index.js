@@ -1,35 +1,11 @@
-export default function (sass) {
-  let data = {
-    typography: [
-      {key: "", property: "font-family", abbrivation: "", modifiers: []},
-      {key: "", property: "font-size", abbrivation: "", modifiers: []},
-      {key: "", property: "font-weight", abbrivation: "", modifiers: []},
-      {key: "", property: "font-style", abbrivation: "", modifiers: []},
-      {key: "", property: "text-align", abbrivation: "", modifiers: []},
-      {key: "", property: "text-transform", abbrivation: "", modifiers: []},
-      {key: "", property: "text-decoration", abbrivation: "", modifiers: []},
-      {key: "", property: "text-indent", abbrivation: "", modifiers: []},
-      {key: "", property: "text-overflow", abbrivation: "", modifiers: []},
-      {key: "", property: "text-shadow", abbrivation: "", modifiers: []},
-      {key: "", property: "vertical-align", abbrivation: "", modifiers: []},
-      {key: "", property: "line-height", abbrivation: "", modifiers: []},
-      {key: "", property: "letter-spacing", abbrivation: "", modifiers: []},
-      {key: "", property: "word-spacing", abbrivation: "", modifiers: []},
-      {key: "", property: "writing-mode", abbrivation: "", modifiers: []},
-      {key: "", property: "white-space", abbrivation: "", modifiers: []},
-    ],
-    colors: [],
-    layout: [],
-    border: [],
-    background: [],
-    flex: [],
-    grid: [],
-    states: [],
-    elements: [],
-  }
+import {allProps} from "./modules";
+import {converter} from "./converter";
 
+export function bow(sass) {
+  let c = converter(sass)
   return {
-    'range($count, $start-from: 0, $step: 1, $prefix: \"\")': range
+    'range($count, $start-from: 0, $step: 1, $prefix: \"\")': range,
+    'get-prop($key)': getProp,
   }
 
   function range(count, startFrom = 0, step = 1, prefix = "") {
@@ -44,6 +20,27 @@ export default function (sass) {
       .map(e => `${p}${e.toString()}`)
       .map((e, i) => l.setValue(i, new sass.types.String(e)))
 
-    return l
+    return l;
+  }
+
+  function getProp(key) {
+    // key = key.getValue();
+    console.log(key)
+    let prop = allProps.find(p => p.key === key);
+
+    if (!prop) return c.toSass(null)
+
+    let keys = Object.keys(prop).length,
+      map = new sass.types.Map(keys.length),
+      val = keys.map(k => prop[k]);
+
+    console.log(val)
+
+    keys.forEach((p, i) => {
+      map.setKey(i, c.toSass(p))
+      map.setValue(i, c.toSass(val[i]))
+    });
+
+    return map;
   }
 }

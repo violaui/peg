@@ -5,7 +5,8 @@
 	"main": "lib/index.js",
 	"unpkg": "lib/index.js",
 	"scripts": {
-		"build": "babel src -d lib --delete-dir-on-start"
+		"build": "babel src -d lib --delete-dir-on-start",
+		"test": "jest && codecov"
 	},
 	"repository": "https://github.com/violaui/bow.git",
 	"author": "amirhosseinab",
@@ -16,16 +17,33 @@
 		"css-framework"
 	],
 	"files": [
-		"lib/index.js"
+		"lib"
 	],
 	"publishConfig": {
 		"access": "public"
+	},
+	"jest": {
+		"verbose": true,
+		"testEnvironment": "node",
+		"collectCoverage": true,
+		"coverageDirectory": "./coverage/",
+		"clearMocks": true,
+		"moduleFileExtensions": [
+			"js"
+		],
+		"coveragePathIgnorePatterns": [
+			"/node_modules/"
+		]
+	},
+	"dependencies": {
+		"node-sass": "^4.12.0"
 	},
 	"devDependencies": {
 		"@babel/cli": "^7.4.4",
 		"@babel/core": "^7.4.5",
 		"@babel/plugin-proposal-object-rest-spread": "^7.4.4",
 		"@babel/preset-env": "^7.4.5",
-		"node-sass": "^4.12.0"
+		"babel-jest": "^24.8.0",
+		"jest": "^24.8.0"
 	}
 }

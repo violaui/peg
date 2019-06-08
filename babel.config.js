@@ -1,10 +1,19 @@
 module.exports = function (api) {
-  api.cache(false);
-  const presets = ["@babel/preset-env"];
-  const plugins = ["@babel/plugin-proposal-object-rest-spread"];
+  api.cache.never();
+
+  const presets = [
+    ["@babel/preset-env",
+      {
+        targets: {node: "current"}
+      }]
+  ];
+  const plugins = [
+    "@babel/plugin-proposal-object-rest-spread",
+  ];
   return {
     sourceType: "unambiguous",
     presets,
-    plugins
+    plugins,
+    // only: ["./src"]
   }
 };
