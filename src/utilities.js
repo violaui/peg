@@ -10,7 +10,7 @@ export function getProp(key) {
   return properties.find(p => p.key === key)
 }
 
-export function getPropsWithValues(key, values, rtlValues = null) {
+export function getPropWithValues(key, values, rtlValues = null) {
   let prop = getProp(key)
   let obj = {default: {}}
 
