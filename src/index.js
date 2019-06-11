@@ -1,12 +1,11 @@
 import {types} from "node-sass";
-import {properties} from "./modules";
-import {sassHelper} from "./sass-helper";
-import {wrapper} from "./sass-wrapper";
-import * as funcs from "./utilities";
-
+import * as modules from "./modules";
+import {sassConverter} from "./sass-converter";
+import {sassWrapper} from "./sass-wrapper";
+import * as utilities from "./utilities";
 
 export const bow = {
-  properties: properties,
-  sassFunctions: wrapper(sassHelper(types)),
-  funcs
+  modules: modules,
+  sassFunctions: sassWrapper(modules, sassConverter(types)),
+  utilities: utilities
 }

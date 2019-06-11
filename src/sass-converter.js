@@ -1,4 +1,4 @@
-export function sassHelper(sassTypes) {
+export function sassConverter(sassTypes) {
   return {
     toSassValue
   }
@@ -12,15 +12,16 @@ export function sassHelper(sassTypes) {
       case "boolean":
         return toBoolean(v)
       case "object":
-        return handlerObject(v)
+        return toObject(v)
       default:
         return toNull();
     }
   }
 
-  function handlerObject(v) {
+  function toObject(v) {
     if (!v)
       return toNull()
+
     if (Array.isArray(v))
       return toList(v);
     else
@@ -43,10 +44,16 @@ export function sassHelper(sassTypes) {
     return sassTypes.Null.NULL;
   }
 
+  function toList(array) {
+    let l = new sassTypes.List(array.length)
+    array.forEach((e, i) => l.setValue(i, toSassValue(e)))
+    return l
+  }
+
   function toMap(obj) {
-    let keys = Object.keys(obj),
-      m = new sassTypes.Map(keys.length),
-      values = keys.map(k => obj[k]);
+    let keys = Object.keys(obj)
+    let m = new sassTypes.Map(keys.length)
+    let values = keys.map(k => obj[k])
 
     keys.forEach((p, i) => {
       m.setKey(i, toSassValue(p))
@@ -54,14 +61,5 @@ export function sassHelper(sassTypes) {
     });
 
     return m
-  }
-
-  function toList(array) {
-    let l = new sassTypes.List(array.length)
-    array.forEach((e, i) => {
-      l.setValue(i, toSassValue(e))
-    })
-
-    return l
   }
 }

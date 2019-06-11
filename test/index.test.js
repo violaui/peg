@@ -1,33 +1,28 @@
 import {types as t} from "node-sass";
 import {bow} from "../src/index";
-import {getPropWithValues} from "../src/utilities";
 
 describe("bow.utilities", () => {
+  test('getPropName(key: "-top")', () => {
+    let got = bow.utilities.getPropName("-top")
+    expect(got).toBe("top")
+  })
+
   test.each([
-    ["font-size", ["1rem", "2rem", "3rem", "4rem", "5rem", "6rem"], null, {
-      default: {
-        f1: "1rem",
-        f2: "2rem",
-        f3: "3rem",
-        f4: "4rem",
-        f5: "5rem",
-        f6: "6rem",
-      }
+    ["font-size",
+      ["1rem", "2rem", "3rem", "4rem", "5rem", "6rem"], {
+      f1: "1rem",
+      f2: "2rem",
+      f3: "3rem",
+      f4: "4rem",
+      f5: "5rem",
+      f6: "6rem"
     }],
-    ["line-height", [1, 2, 3], [1.5, 2.5, 3.5], {
-      default: {lh1: 1, lh2: 2, lh3: 3},
-      ltr: {lh1: 1, lh2: 2, lh3: 3},
-      rtl: {lh1: 1.5, lh2: 2.5, lh3: 3.5}
-    }],
-    ["line-height", [1, 2], [1.5], {
-      default: {lh1: 1, lh2: 2, lh3: 2},
-      ltr: {lh1: 1, lh2: 2, lh3: 2},
-      rtl: {lh1: 1.5, lh2: 1.5, lh3: 1.5}
-    }]
-  ])("getPropWithValues(%p, %p, %p)",
-    (key, values, rtlValues, expected) => {
-      let got = getPropWithValues(key, values, rtlValues)
-      expect(got).toEqual(expected)
+    ["line-height", [1, 2], {lh1: 1, lh2: 2, lh3: 2}],
+
+  ])("getStructuredValues(key = %p, values = %p)",
+    (key, values, expected) => {
+      let got = bow.utilities.getStructuredValues(key, values)
+      expect(got).toStrictEqual(expected)
     })
 })
 
@@ -47,27 +42,24 @@ describe("bow.sassFunctions", () => {
       })
     })
 
-  test('getPropWithValues($key: "font-style", $values: ["i"], $rtl-values: null)', () => {
-
-    let func = bow.sassFunctions["get-prop-with-values($key, $values, $rtl-values: null)"]
-
-    function toSassList(list) {
-      if (!list) {
-        return t.Null.NULL
-      }
-      let sl = new t.List(list.length)
-      for (let i = 0; i < list.length; i++) {
-        sl.setValue(i, new t.String(list[i]))
-      }
-      return sl;
-    }
-
-    let values = ["italic"]
-    let got = func(new t.String("font-style"), toSassList(values), t.Null.NULL)
-
-    expect(got.getLength()).toBe(values.length)
-    expect(got.getKey(0).getValue()).toBe("default")
-    expect(got.getValue(0).getKey(0).getValue()).toBe("i")
-    expect(got.getValue(0).getValue(0).getValue()).toBe("italic")
+  test('sassGetPropName(key = "width-v")', () => {
+    let got = bow.sassFunctions["get-property-name($key)"](new t.String("width-v"))
+    expect(got.getValue()).toBe("width")
   })
+
+  test.each([
+    ["Typography", bow.sassFunctions["get-typography-keys()"]],
+    ["Color", bow.sassFunctions["get-color-keys()"]],
+    ["Layout", bow.sassFunctions["get-layout-keys()"]],
+    ["Border", bow.sassFunctions["get-border-keys()"]],
+    ["Background", bow.sassFunctions["get-background-keys()"]],
+    ["Flex", bow.sassFunctions["get-flex-keys()"]],
+    ["Grid", bow.sassFunctions["get-grid-keys()"]],
+    ["States", bow.sassFunctions["get-states-keys()"]],
+    ["Element", bow.sassFunctions["get-element-keys()"]],
+  ])('sassGet%sKeys() returns value',
+    (_, func) => {
+      let got = func()
+      expect(got).toBeTruthy()
+    })
 })

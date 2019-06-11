@@ -1,4 +1,4 @@
-import {properties} from "./modules";
+import * as modules from "./modules";
 
 export function getRange(count, startFrom = 0, step = 1, prefix = "") {
   return [...Array(count).keys()]
@@ -6,13 +6,18 @@ export function getRange(count, startFrom = 0, step = 1, prefix = "") {
     .map(e => `${prefix}${e}`)
 }
 
-export function getProp(key) {
-  return properties.find(p => p.key === key)
+function getProp(key) {
+  return modules.all.find(p => p.key === key);
 }
 
-export function getPropWithValues(key, values, rtlValues = null) {
+export function getPropName(key) {
   let prop = getProp(key)
-  let obj = {default: {}}
+  return prop && prop.prop
+}
+
+export function getStructuredValues(key, values) {
+  let prop = getProp(key)
+  let obj = {}
 
   if (!prop) {
     return null
@@ -21,18 +26,9 @@ export function getPropWithValues(key, values, rtlValues = null) {
     return null
   }
 
-  if (rtlValues && rtlValues.length) {
-    obj.ltr = {}
-    obj.rtl = {}
-  }
-
   prop.valueNames.forEach((n, i) => {
-    obj.default[n] = values[i] || values[values.length - 1]
-
-    if (obj.ltr && obj.rtl) {
-      obj.ltr[n] = values[i] || values[values.length - 1]
-      obj.rtl[n] = rtlValues[i] || rtlValues[rtlValues.length - 1]
-    }
+    obj[n] = values[i] || values[values.length - 1]
   })
+
   return obj
 }
