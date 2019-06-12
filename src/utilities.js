@@ -6,10 +6,6 @@ export function getRange(count, startFrom = 0, step = 1, prefix = "") {
     .map(e => `${prefix}${e}`)
 }
 
-function getProp(key) {
-  return modules.all.find(p => p.key === key);
-}
-
 export function getPropName(key) {
   let prop = getProp(key)
   return prop && prop.prop
@@ -31,4 +27,8 @@ export function getStructuredValues(key, values) {
   })
 
   return obj
+}
+
+function getProp(key) {
+  return modules.all.find(p => p.key === key);
 }
