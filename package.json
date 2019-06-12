@@ -1,6 +1,6 @@
 {
 	"name": "@violaui/bow",
-	"version": "0.3.1",
+	"version": "0.3.2",
 	"description": "A supplementary JavaScript code to play the Viola better.",
 	"main": "lib/index.js",
 	"unpkg": "lib/index.js",

@@ -21,7 +21,9 @@ export function sassConverter(sassTypes) {
   function toObject(v) {
     if (!v)
       return toNull()
-
+    if (v.hasOwnProperty("value") && v.hasOwnProperty("unit")) {
+      return toNumber(v.value, v.unit)
+    }
     if (Array.isArray(v))
       return toList(v);
     else
@@ -32,8 +34,8 @@ export function sassConverter(sassTypes) {
     return new sassTypes.String(v);
   }
 
-  function toNumber(v) {
-    return new sassTypes.Number(v);
+  function toNumber(v, unit = "") {
+    return new sassTypes.Number(v, unit);
   }
 
   function toBoolean(v) {

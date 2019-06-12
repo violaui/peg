@@ -69,7 +69,16 @@ export function sassWrapper(modules, {toSassValue}) {
   function sassGetStructuredValues(key, values) {
     let jsValues = []
     for (let i = 0; i < values.getLength(); i++) {
-      jsValues.push(values.getValue(i).getValue())
+      let value;
+      if (values.getValue(i).getUnit()) {
+        value = {
+          value: values.getValue(i).getValue(),
+          unit: values.getValue(i).getUnit(),
+        }
+      } else {
+        value = values.getValue(i)
+      }
+      jsValues.push(value)
     }
     return toSassValue(utilities.getStructuredValues(key.getValue(), jsValues))
   }
