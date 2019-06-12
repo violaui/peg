@@ -1,0 +1,8 @@
+{
+	"rules": {
+		"semi": ["off", "always"],
+		"quotes": ["warn", "double"]
+	},
+	"extends": "eslint:recommended",
+	"parser": "babel-eslint"
+}

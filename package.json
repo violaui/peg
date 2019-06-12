@@ -6,7 +6,7 @@
 	"unpkg": "lib/index.js",
 	"scripts": {
 		"build": "babel src -d lib --delete-dir-on-start",
-		"test": "jest && codecov"
+		"test": "jest && codecov && cat ./coverage/lcov.info | codacy-coverage"
 	},
 	"repository": "https://github.com/violaui/bow.git",
 	"author": "amirhosseinab",
@@ -43,7 +43,10 @@
 		"@babel/core": "^7.4.5",
 		"@babel/plugin-proposal-object-rest-spread": "^7.4.4",
 		"@babel/preset-env": "^7.4.5",
+		"babel-eslint": "^10.0.1",
 		"babel-jest": "^24.8.0",
+		"codacy-coverage": "^3.4.0",
+		"eslint": "^5.16.0",
 		"jest": "^24.8.0"
 	}
 }

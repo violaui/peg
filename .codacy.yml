@@ -1,0 +1,3 @@
+exclude_paths:
+  - 'babel.config.js'
+  - 'test/**'

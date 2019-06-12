@@ -33,7 +33,7 @@ describe("bow.sassFunctions", () => {
     [3, 5, 5, "", ["25", "30", "35"]],
   ])("get-range($count: %i, $start-from: %i, $step: %i, $prefix: %p)",
     (count, sf, s, p, expected) => {
-      let getRange = bow.sassFunctions['get-range($count, $start-from: 0, $step: 1, $prefix: \"\")']
+      let getRange = bow.sassFunctions["get-range($count, $start-from: 0, $step: 1, $prefix: \"\")"]
       let got = getRange(new t.Number(count), new t.Number(sf), new t.Number(s), new t.String(p))
 
       expect(got.getLength()).toBe(expected.length)

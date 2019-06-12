@@ -2,20 +2,20 @@ import * as utilities from "./utilities";
 
 export function sassWrapper(modules, {toSassValue}) {
   return {
-    'get-typography-keys()': sassGetTypographyKeys,
-    'get-color-keys()': sassGetColorKeys,
-    'get-layout-keys()': sassGetLayoutKeys,
-    'get-border-keys()': sassGetBorderKeys,
-    'get-background-keys()': sassGetBackgroundKeys,
-    'get-flex-keys()': sassGetFlexKeys,
-    'get-grid-keys()': sassGetGridKeys,
-    'get-states-keys()': sassGetStatesKeys,
-    'get-element-keys()': sassGetElementKeys,
-    'get-all-keys()': sassGetAllKeys(),
+    "get-typography-keys()": sassGetTypographyKeys,
+    "get-color-keys()": sassGetColorKeys,
+    "get-layout-keys()": sassGetLayoutKeys,
+    "get-border-keys()": sassGetBorderKeys,
+    "get-background-keys()": sassGetBackgroundKeys,
+    "get-flex-keys()": sassGetFlexKeys,
+    "get-grid-keys()": sassGetGridKeys,
+    "get-states-keys()": sassGetStatesKeys,
+    "get-element-keys()": sassGetElementKeys,
+    "get-all-keys()": sassGetAllKeys(),
 
-    'get-property-name($key)': sassGetPropName,
-    'get-range($count, $start-from: 0, $step: 1, $prefix: \"\")': sassGetRange,
-    'get-structured-values($key, $values)': sassGetStructuredValues,
+    "get-property-name($key)": sassGetPropName,
+    "get-range($count, $start-from: 0, $step: 1, $prefix: \"\")": sassGetRange,
+    "get-structured-values($key, $values)": sassGetStructuredValues,
   }
 
   function sassGetTypographyKeys() {
