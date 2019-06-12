@@ -6,7 +6,7 @@
 	"unpkg": "lib/index.js",
 	"scripts": {
 		"build": "babel src -d lib --delete-dir-on-start",
-		"test": "jest && codecov && cat ./coverage/lcov.info | codacy-coverage"
+		"test": "jest && codecov"
 	},
 	"repository": "https://github.com/violaui/bow.git",
 	"author": "amirhosseinab",
