@@ -70,13 +70,13 @@ export function sassWrapper(modules, {toSassValue}) {
     let jsValues = []
     for (let i = 0; i < values.getLength(); i++) {
       let value;
-      if (values.getValue(i).getUnit()) {
+      if (values.getValue(i).getUnit) {
         value = {
           value: values.getValue(i).getValue(),
           unit: values.getValue(i).getUnit(),
         }
       } else {
-        value = values.getValue(i)
+        value = values.getValue(i).getValue()
       }
       jsValues.push(value)
     }
