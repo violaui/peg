@@ -1,22 +1,22 @@
 language: node_js
 node_js:
-  - 10
+- 10
 before_install:
-  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.16.0
-  - export PATH="$HOME/.yarn/bin:$PATH"
+- curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.16.0
+- export PATH="$HOME/.yarn/bin:$PATH"
 cache: yarn
 install:
-  - yarn global add codecov
-  - yarn install
+- yarn global add codecov
+- yarn install
 before_script:
-  - yarn run test
+- yarn run test
 script:
-  - yarn run build
+- yarn run build
 deploy:
   provider: npm
   email: amirhosseinab@outlook.com
   api_key:
-    secure: PPegqDPKEpUfolUz5kPdG2l6v4k0cs+TmkYs3HwlXkl0RNh7wesZ95lX7v8uS1Gg8MOQom7N7Y8ZZKNq9WYAFB9diiLmZBorZw8ch6ThOfarT7cOPeULoQuvkbZ8m3mGcD7Fx23ryzvyyYhaEFIxw52WR4Ew+3TElilQQ1JXuHDfl+DKY/87fouXZYbFMXC2UMq+f+FCjFr4Q4G4p3KhsXw4t9DmLg0B3FHyxdbJm3luRPpnyQ3MGRnzroL7dXTcVcEerK6lUKfPWEGNMgtq//Ie4hPOcDmz5hjZDnj8TF3s80GZ7BT3aV1tLQisbxJOadnfn78n9rhOmec6PLdbTxn5adGdSUxnpqh7zH5ClriWv6CneHzE2Tbx6Lx+3YUC/g54cIr59SzRYl9NmfSYI5mMSciacOv7WXjnvObdH51v7ufb5YgzDfpaZUssR/GAtkc9Q7UsqQmmcU4Srp8Vfz7jBnzOLZNbUGA8AdUwuHrGDuEA00K7l0sHU0SyoV0W3VUhk4hr1qrgFVkdI1AtpmW6mOX9yZNATUzyWU5acbC7nw6Kitqn/Hy561dhx57ZgQmmcEPInU3M2AWbvD2FkqjWZzG2GxoSCXWwnrO8flEweWhLu4842688EHQbYN1JljzouUxz/qh2QMQa5TmC0h6YP22zMd7NisWMfM+r5J4=
+    secure: mPSQJ2wd4pDvpJZ0IBys1b6bmjdJTNHZB0hHy5AwKzwBflbe0rQ4yqaXss+qjKbJLVAgtrAT8NMVmX5Fw+cNgqUsaEWvJxkoZpYtDDC6i7jYT0RJqj+c1w33IOeidMP1pnWVlEzbPMdj7YmNk6ty+dWYTSjmdRdcBWky4xC56I2kqCuSGvNABZMS9L/PEtyvPkyeRE8rbLqmEGF56aCqXLenCy/dBPbgEN9rkeDI2WTEWF6JzwZUUNLj5igSnOOzoeVcl7ERHMSuu3FPRepOMSkWa6Pu+D4L94/kZd80awGjM5LiMqCd+e7qrOgaFSZxwvo9CZAx3n/xXqbOF7+J3BLsPHp+c5XYX+ijkDFQnvInYxo0rM4hXdr1qWSkVwMhkSK4gN+QAkPASlxZ19egIepiFlz4HspFl5RptkHt7ngga3qqYP1yutFLP7gpx4MGcF7TVdF1oUzg8DktelrNo/aOn8oRNKqrF/ApRq9dgvW6oKG+/cxq3udBSErqesfOP5ooPcwueNyCQ8YXUiU8ZRGK99a1CMLDLr96xRVYjP5YgBpDJSdyPjzm1A/nycZrBJGcAJiqtjX3xK46QSViAITWjlOO7JZvc/ybOZjSQ4k/A9qfhTJ382VBsZrTr12NplfwJIaWjSHDuki9Ck0S9QUhHqK/XNvm4lTqCfkWYMU=
   on:
     tags: true
     branch: master

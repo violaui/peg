@@ -1,9 +1,9 @@
 import {types as t} from "node-sass";
-import {bow} from "../src/index";
+import {peg} from "../src/index";
 
-describe("bow.utilities", () => {
+describe("peg.utilities", () => {
   test('getPropName(key: "-top")', () => {
-    let got = bow.utilities.getPropName("-top")
+    let got = peg.utilities.getPropName("-top")
     expect(got).toBe("top")
   })
 
@@ -21,19 +21,19 @@ describe("bow.utilities", () => {
 
   ])("getStructuredValues(key = %p, values = %p)",
     (key, values, expected) => {
-      let got = bow.utilities.getStructuredValues(key, values)
+      let got = peg.utilities.getStructuredValues(key, values)
       expect(got).toStrictEqual(expected)
     })
 })
 
-describe("bow.sassFunctions", () => {
+describe("peg.sassFunctions", () => {
   test.each([
     [3, 1, 1, "-", ["-1", "-2", "-3"]],
     [2, 0, 10, "f", ["f0", "f10"]],
     [3, 5, 5, "", ["25", "30", "35"]],
   ])("get-range($count: %i, $start-from: %i, $step: %i, $prefix: %p)",
     (count, sf, s, p, expected) => {
-      let getRange = bow.sassFunctions["get-range($count, $start-from: 0, $step: 1, $prefix: \"\")"]
+      let getRange = peg.sassFunctions["get-range($count, $start-from: 0, $step: 1, $prefix: \"\")"]
       let got = getRange(new t.Number(count), new t.Number(sf), new t.Number(s), new t.String(p))
 
       expect(got.getLength()).toBe(expected.length)
@@ -43,20 +43,20 @@ describe("bow.sassFunctions", () => {
     })
 
   test('sassGetPropName(key = "width-v")', () => {
-    let got = bow.sassFunctions["get-property-name($key)"](new t.String("width-v"))
+    let got = peg.sassFunctions["get-property-name($key)"](new t.String("width-v"))
     expect(got.getValue()).toBe("width")
   })
 
   test.each([
-    ["Typography", bow.sassFunctions["get-typography-keys()"]],
-    ["Color", bow.sassFunctions["get-color-keys()"]],
-    ["Layout", bow.sassFunctions["get-layout-keys()"]],
-    ["Border", bow.sassFunctions["get-border-keys()"]],
-    ["Background", bow.sassFunctions["get-background-keys()"]],
-    ["Flex", bow.sassFunctions["get-flex-keys()"]],
-    ["Grid", bow.sassFunctions["get-grid-keys()"]],
-    ["States", bow.sassFunctions["get-states-keys()"]],
-    ["Element", bow.sassFunctions["get-element-keys()"]],
+    ["Typography", peg.sassFunctions["get-typography-keys()"]],
+    ["Color", peg.sassFunctions["get-color-keys()"]],
+    ["Layout", peg.sassFunctions["get-layout-keys()"]],
+    ["Border", peg.sassFunctions["get-border-keys()"]],
+    ["Background", peg.sassFunctions["get-background-keys()"]],
+    ["Flex", peg.sassFunctions["get-flex-keys()"]],
+    ["Grid", peg.sassFunctions["get-grid-keys()"]],
+    ["States", peg.sassFunctions["get-states-keys()"]],
+    ["Element", peg.sassFunctions["get-element-keys()"]],
   ])('sassGet%sKeys() returns value',
     (_, func) => {
       let got = func()
@@ -69,7 +69,7 @@ describe("bow.sassFunctions", () => {
       let values = [5, 6]
       let sassValues = new t.List(values.length)
       values.forEach((v, i) => sassValues.setValue(i, new t.Number(v, "rem")))
-      let got = bow.sassFunctions["get-structured-values($key, $values)"](new t.String(key), sassValues)
+      let got = peg.sassFunctions["get-structured-values($key, $values)"](new t.String(key), sassValues)
 
       expect(got.getLength()).toBe(3) // 3 is the length of line-height values
       expect(got.getKey(0).getValue()).toBe("lh1")

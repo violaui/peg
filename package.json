@@ -1,6 +1,6 @@
 {
-	"name": "@violaui/bow",
-	"version": "0.3.3",
+	"name": "@violaui/peg",
+	"version": "0.1.0",
 	"description": "A supplementary JavaScript code to play the Viola better.",
 	"main": "lib/index.js",
 	"unpkg": "lib/index.js",
@@ -8,7 +8,7 @@
 		"build": "babel src -d lib --delete-dir-on-start",
 		"test": "jest && codecov"
 	},
-	"repository": "https://github.com/violaui/bow.git",
+	"repository": "https://github.com/violaui/peg.git",
 	"author": "amirhosseinab",
 	"license": "MIT",
 	"keywords": [
