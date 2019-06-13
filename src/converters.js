@@ -53,6 +53,10 @@ function toSass(t) {
   }
 
   function toMap(value) {
+    if (isNumber(value)) {
+      return toNumber(value.value, value.unit)
+    }
+
     let map = new t.Map(Object.keys(value).length)
     Object.keys(value)
       .map((k, i) => {
@@ -64,6 +68,12 @@ function toSass(t) {
 
   function toNull() {
     return t.Null.NULL
+  }
+
+  function isNumber(value) {
+    return Object.keys(value).length === 2 &&
+      value.hasOwnProperty("value") &&
+      value.hasOwnProperty("unit");
   }
 }
 

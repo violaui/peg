@@ -85,6 +85,16 @@ describe("convert.toSass", () => {
 
     expect(obj).toStrictEqual(value)
   })
+
+  test("should convert special JS object {value:..., unit:...} to SASS Number", () => {
+    const value = {value: 42, unit: "rem"}
+    const got = convert.toSASS(value)
+
+    expect(got.getValue()).toBe(42)
+    expect(got.getUnit()).toBe("rem")
+
+  })
+
 })
 describe("convert.toJs", () => {
   test("should convert the given SASS Number to JS number", () => {

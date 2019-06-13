@@ -1,6 +1,7 @@
 import * as utilities from "./utilities";
+import {convert} from "./converters";
 
-export function sassWrapper(modules, {toSassValue}) {
+export function sassWrapper(modules) {
   return {
     "get-typography-keys()": sassGetTypographyKeys,
     "get-color-keys()": sassGetColorKeys,
@@ -19,67 +20,54 @@ export function sassWrapper(modules, {toSassValue}) {
   }
 
   function sassGetTypographyKeys() {
-    return toSassValue(modules.getTypographyKeys())
+    return convert.toSASS(modules.getTypographyKeys())
   }
 
   function sassGetColorKeys() {
-    return toSassValue(modules.getColorKeys())
+    return convert.toSASS(modules.getColorKeys())
   }
 
   function sassGetLayoutKeys() {
-    return toSassValue(modules.getLayoutKeys())
+    return convert.toSASS(modules.getLayoutKeys())
   }
 
   function sassGetBorderKeys() {
-    return toSassValue(modules.getBorderKeys())
+    return convert.toSASS(modules.getBorderKeys())
   }
 
   function sassGetBackgroundKeys() {
-    return toSassValue(modules.getBackgroundKeys())
+    return convert.toSASS(modules.getBackgroundKeys())
   }
 
   function sassGetFlexKeys() {
-    return toSassValue(modules.getFlexKeys())
+    return convert.toSASS(modules.getFlexKeys())
   }
 
   function sassGetGridKeys() {
-    return toSassValue(modules.getGridKeys())
+    return convert.toSASS(modules.getGridKeys())
   }
 
   function sassGetStatesKeys() {
-    return toSassValue(modules.getStatesKeys())
+    return convert.toSASS(modules.getStatesKeys())
   }
 
   function sassGetElementKeys() {
-    return toSassValue(modules.getElementKeys())
+    return convert.toSASS(modules.getElementKeys())
   }
 
   function sassGetAllKeys() {
-    return toSassValue(modules.getAllKeys())
+    return convert.toSASS(modules.getAllKeys())
   }
 
-  function sassGetRange(count, startFrom = toSassValue(0), step = toSassValue(1), prefix = toSassValue("")) {
-    return toSassValue(utilities.getRange(count.getValue(), startFrom.getValue(), step.getValue(), prefix.getValue()))
+  function sassGetRange(count, startFrom = convert.toSASS(0), step = convert.toSASS(1), prefix = convert.toSASS("")) {
+    return convert.toSASS(utilities.getRange(convert.toJS(count), convert.toJS(startFrom), convert.toJS(step), convert.toJS(prefix)))
   }
 
   function sassGetPropName(key) {
-    return toSassValue(utilities.getPropName(key.getValue()))
+    return convert.toSASS(utilities.getPropName(convert.toJS(key)))
   }
 
   function sassGetStructuredValues(key, values) {
-    let jsValues = []
-    for (let i = 0; i < values.getLength(); i++) {
-      let value;
-      if (values.getValue(i).getUnit) {
-        value = {
-          value: values.getValue(i).getValue(),
-          unit: values.getValue(i).getUnit(),
-        }
-      } else {
-        value = values.getValue(i).getValue()
-      }
-      jsValues.push(value)
-    }
-    return toSassValue(utilities.getStructuredValues(key.getValue(), jsValues))
+    return convert.toSASS(utilities.getStructuredValues(convert.toJS(key), convert.toJS(values)))
   }
 }
