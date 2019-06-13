@@ -8,7 +8,7 @@
 [![Downloads][downloads]](https://www.npmjs.com/package/@violaui/peg)
 [![License][license]](https://github.com/violaui/peg/blob/master/LICENSE)
 
-A supplementary JavaScript code to play the Viola easier.
+A supplementary JavaScript code to plug into the [__Pegbox__](https://github.com/violaui/pegbox).
 
 [version]: https://img.shields.io/npm/v/@violaui/peg.svg?&logo=npm&style=flat-square
 [travis]: https://img.shields.io/travis/violaui/peg.svg?&logo=travis&style=flat-square
