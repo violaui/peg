@@ -1,11 +1,9 @@
-import {types} from "node-sass";
 import * as modules from "./modules";
-import {sassConverter} from "./sass-converter";
-import {sassWrapper} from "./sass-wrapper";
 import * as utilities from "./utilities";
+import {convert} from "./converters";
 
 export const peg = {
-  modules: modules,
-  sassFunctions: sassWrapper(modules, sassConverter(types)),
+  modules,
+  convert,
   utilities: utilities
 }
