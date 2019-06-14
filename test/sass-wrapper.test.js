@@ -1,30 +1,5 @@
+import {peg} from "../src";
 import {types as t} from "node-sass";
-import {peg} from "../src/index";
-
-describe("peg.utilities", () => {
-  test('getPropName(key: "-top")', () => {
-    let got = peg.utilities.getPropName("-top")
-    expect(got).toBe("top")
-  })
-
-  test.each([
-    ["font-size",
-      ["1rem", "2rem", "3rem", "4rem", "5rem", "6rem"], {
-      f1: "1rem",
-      f2: "2rem",
-      f3: "3rem",
-      f4: "4rem",
-      f5: "5rem",
-      f6: "6rem"
-    }],
-    ["line-height", [1, 2], {lh1: 1, lh2: 2, lh3: 2}],
-
-  ])("getStructuredValues(key = %p, values = %p)",
-    (key, values, expected) => {
-      let got = peg.utilities.getStructuredValues(key, values)
-      expect(got).toStrictEqual(expected)
-    })
-})
 
 describe("peg.sassFunctions", () => {
   test.each([

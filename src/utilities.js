@@ -8,27 +8,44 @@ export function getRange(count, startFrom = 0, step = 1, prefix = "") {
 
 export function getPropName(key) {
   let prop = getProp(key)
-  return prop && prop.prop
-}
-
-export function getStructuredValues(key, values) {
-  let prop = getProp(key)
-  let obj = {}
-
   if (!prop) {
     return null
   }
-  if (!values || !values.length) {
+  return prop.prop
+}
+
+
+export function getStructuredValues(key, values) {
+  let prop = getProp(key)
+
+  if (!prop || !values || !Object.keys(values).length) {
     return null
   }
 
+  if (values.hasOwnProperty("ltr") && values.hasOwnProperty("rtl")) {
+    return createObjectValue(prop, values);
+  }
+  return createArrayValue(prop, values);
+}
+
+function getProp(key) {
+  return modules.all.find(p => p.key === key);
+}
+
+function createObjectValue(prop, values) {
+  let obj = {ltr: {}, rtl: {}}
   prop.valueNames.forEach((n, i) => {
-    obj[n] = values[i] || values[values.length - 1]
+    obj.ltr[n] = values.ltr[i] || values.ltr[values.ltr.length - 1]
+    obj.rtl[n] = values.rtl[i] || values.ltr[values.ltr.length - 1]
   })
 
   return obj
 }
 
-function getProp(key) {
-  return modules.all.find(p => p.key === key);
+function createArrayValue(prop, values) {
+  let obj = {}
+  prop.valueNames.forEach((n, i) => {
+    obj[n] = values[i] || values[values.length - 1]
+  })
+  return obj
 }
