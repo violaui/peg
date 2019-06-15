@@ -6,11 +6,11 @@ export const convert = {
 }
 
 function toSass(t) {
-  return function (jsValue, unit = "") {
-    return toSassValue(jsValue, unit)
+  return function (jsValue, unit = "", commaSeparated = true) {
+    return toSassValue(jsValue, unit, commaSeparated)
   }
 
-  function toSassValue(jsValue, unit = "") {
+  function toSassValue(jsValue, unit, commaSeparated = true) {
     switch (typeof jsValue) {
       case "number":
         return toNumber(jsValue, unit)
@@ -22,9 +22,9 @@ function toSass(t) {
         if (!jsValue) {
           return toNull()
         } else if (Array.isArray(jsValue)) {
-          return toList(jsValue)
+          return toList(jsValue, commaSeparated)
         } else {
-          return toMap(jsValue)
+          return toMap(jsValue, commaSeparated)
         }
       case "undefined":
         return toNull()
@@ -46,13 +46,13 @@ function toSass(t) {
     return value ? t.Boolean.TRUE : t.Boolean.FALSE
   }
 
-  function toList(value) {
-    let list = new t.List(value.length)
-    value.map((v, i) => list.setValue(i, toSassValue(v)))
+  function toList(value, commaSeparated) {
+    let list = new t.List(value.length, commaSeparated)
+    value.map((v, i) => list.setValue(i, toSassValue(v, "", commaSeparated)))
     return list
   }
 
-  function toMap(value) {
+  function toMap(value, commaSeparated) {
     if (isNumber(value)) {
       return toNumber(value.value, value.unit)
     }
@@ -61,7 +61,7 @@ function toSass(t) {
     Object.keys(value)
       .map((k, i) => {
         map.setKey(i, toString(k))
-        map.setValue(i, toSassValue(value[k]))
+        map.setValue(i, toSassValue(value[k],"", commaSeparated))
       })
     return map
   }

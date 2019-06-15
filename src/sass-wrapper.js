@@ -68,6 +68,6 @@ export function sassWrapper(modules) {
   }
 
   function sassGetStructuredValues(key, values) {
-    return convert.toSASS(utilities.getStructuredValues(convert.toJS(key), convert.toJS(values)))
+    return convert.toSASS(utilities.getStructuredValues(convert.toJS(key), convert.toJS(values)), "", false)
   }
 }
