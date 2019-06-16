@@ -23,37 +23,18 @@ describe("utilities.getStructuredValues", () => {
       f6: "6rem"
     }],
     ["line-height", [1, 2], {lh1: 1, lh2: 2, lh3: 2}],
+    ["line-height", {ltr: [1, 2, 3], rtl: [1.3, 2.1]}, {
+      ltr: {lh1: 1, lh2: 2, lh3: 3},
+      rtl: {lh1: 1.3, lh2: 2.1, lh3: 3}
+    }],
     ["not-exists", [1, 2, 3], null],
     ["font-size", 3, null],
     ["font-size", null, null],
-    ["font-family", ["arial", "times", "courier new", "monospace"], {
-      primary: "arial",
-      secondary: "times",
-      tertiary: "courier new",
-      code: "monospace",
-    }],
-    ["font-family", {
-      ltr: [["arial", "sans"], ["times", "sans-serif"], "courier new", "monospace"],
-      rtl: [["roboto", "sans"], ["tahoma", "sans-serif"], "andalib"]
-    }, {
-      ltr: {
-        primary: ["arial", "sans"],
-        secondary: ["times", "sans-serif"],
-        tertiary: "courier new",
-        code: "monospace",
-      },
-      rtl: {
-        primary: ["roboto", "sans"],
-        secondary: ["tahoma", "sans-serif"],
-        tertiary: "andalib",
-        code: "monospace",
-      },
-    }],
+    ["primary-font", {ltr: ["arial", "sans"], rtl: ["tahoma", "sans-serif"]},
+      {primary: {ltr: ["arial", "sans"], rtl: ["tahoma", "sans-serif"]}}]
   ])("given key: %p and values : %p should return %p",
     (key, values, expected) => {
       let got = utilities.getStructuredValues(key, values)
       expect(got).toStrictEqual(expected)
     })
 })
-
-

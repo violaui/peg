@@ -1,7 +1,10 @@
 import {getRange} from "./utilities";
 
 // Typography
-const fontFamilies = ["primary", "secondary", "tertiary", "code"];
+const primaryFont = "primary";
+const secondaryFont = "secondary";
+const tertiaryFont = "tertiary";
+const codeFont = "code";
 const fontSizes = getRange(6, 1, 1, "f");
 const fontWeights = getRange(9, 1, 100, "fw");
 const fontStyles = ["i"];
@@ -41,7 +44,10 @@ const opacityNames = getRange(11, 0, 10, "o-");
 const overflows = ["visible", "hidden", "clip", "scroll", "auto"]
 
 export const typography = [
-  {key: "font-family", prop: "font-family", valueNames: fontFamilies},
+  {key: "primary-font", prop: "font-family", valueNames: primaryFont},
+  {key: "secondary-font", prop: "font-family", valueNames: secondaryFont},
+  {key: "tertiary-font", prop: "font-family", valueNames: tertiaryFont},
+  {key: "code-font", prop: "font-family", valueNames: codeFont},
   {key: "font-size", prop: "font-size", valueNames: fontSizes},
   {key: "font-weight", prop: "font-weight", valueNames: fontWeights},
   {key: "font-style", prop: "font-style", valueNames: fontStyles},

@@ -23,7 +23,13 @@ export function getStructuredValues(key, values) {
   }
 
   if (values.hasOwnProperty("ltr") && values.hasOwnProperty("rtl")) {
-    return createObjectValue(prop, values);
+    if (typeof prop.valueNames === "string" && Array.isArray(values.ltr) && Array.isArray(values.rtl)) {
+      return createObjectArrayValue(prop, values);
+    } else if (Array.isArray(prop.valueNames)) {
+      return createArrayValue(prop, values);
+    } else {
+      return createObjectValue(prop, values);
+    }
   }
   return createArrayValue(prop, values);
 }
@@ -39,6 +45,12 @@ function createObjectValue(prop, values) {
     obj.rtl[n] = values.rtl[i] || values.ltr[values.ltr.length - 1]
   })
 
+  return obj
+}
+
+function createObjectArrayValue(prop, values) {
+  let obj = {}
+  obj[prop.valueNames] = {ltr: values.ltr, rtl: values.rtl}
   return obj
 }
 
