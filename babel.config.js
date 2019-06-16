@@ -16,6 +16,5 @@ module.exports = function (api) {
     sourceType: "unambiguous",
     presets,
     plugins,
-    // only: ["./src"]
   }
 };

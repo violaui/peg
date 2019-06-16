@@ -1,2 +1,4 @@
 test/
 node_modules/
+babel.config.js
+lib/

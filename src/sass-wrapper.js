@@ -16,7 +16,7 @@ export function sassWrapper(modules) {
 
     "get-property-name($key)": sassGetPropName,
     "get-range($count, $start-from: 0, $step: 1, $prefix: \"\")": sassGetRange,
-    "get-structured-values($key, $values)": sassGetStructuredValues,
+    "create-definition-data($key, $values)": sassCreateDefinitionData,
   }
 
   function sassGetTypographyKeys() {
@@ -67,7 +67,7 @@ export function sassWrapper(modules) {
     return convert.toSASS(utilities.getPropName(convert.toJS(key)))
   }
 
-  function sassGetStructuredValues(key, values) {
-    return convert.toSASS(utilities.getStructuredValues(convert.toJS(key), convert.toJS(values)), "", false)
+  function sassCreateDefinitionData(key, values) {
+    return convert.toSASS(utilities.createDefinitionData(convert.toJS(key), convert.toJS(values)), "", false)
   }
 }

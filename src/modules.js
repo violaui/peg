@@ -1,10 +1,10 @@
 import {getRange} from "./utilities";
 
 // Typography
-const primaryFont = "primary";
-const secondaryFont = "secondary";
-const tertiaryFont = "tertiary";
-const codeFont = "code";
+const primaryFont = ["primary"];
+const secondaryFont = ["secondary"];
+const tertiaryFont = ["tertiary"];
+const codeFont = ["code"];
 const fontSizes = getRange(6, 1, 1, "f");
 const fontWeights = getRange(9, 1, 100, "fw");
 const fontStyles = ["i"];

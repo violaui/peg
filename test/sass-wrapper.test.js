@@ -38,25 +38,23 @@ describe("peg.sassFunctions", () => {
       expect(got).toBeTruthy()
     })
 
-  test("sassGetStructuredValues(key: \"line-height\", values: [5, 6])",
-    () => {
-      let key = "line-height"
-      let values = [5, 6]
-      let sassValues = new t.List(values.length)
-      values.forEach((v, i) => sassValues.setValue(i, new t.Number(v, "rem")))
-      let got = peg.sassFunctions["get-structured-values($key, $values)"](new t.String(key), sassValues)
+  test("sassCreateDefinitionData(key = line-height, values=[1.2, 1.8, 2])", () => {
+    const key = new t.String("line-height")
+    const values = [1.2, 1.8, 2].reduce((list, c, i) => {
+      list.setValue(i, new t.Number(c))
+      return list
+    }, new t.List(3))
 
-      expect(got.getLength()).toBe(3) // 3 is the length of line-height values
-      expect(got.getKey(0).getValue()).toBe("lh1")
-      expect(got.getValue(0).getValue()).toBe(5)
-      expect(got.getValue(0).getUnit()).toBe("rem")
+    let got = peg.sassFunctions["create-definition-data($key, $values)"](key, values)
+    expect(got.constructor.name).toBe("SassMap")
+    expect(got.getKey(0).getValue()).toBe("bidi")
+    expect(got.getValue(0).constructor.name).toBe("SassMap")
+    expect(got.getValue(0).getKey(0).getValue()).toBe("lh1")
+    expect(got.getValue(0).getValue(0).getValue()).toBe(1.2)
+    expect(got.getValue(0).getKey(1).getValue()).toBe("lh2")
+    expect(got.getValue(0).getValue(1).getValue()).toBe(1.8)
+    expect(got.getValue(0).getKey(2).getValue()).toBe("lh3")
+    expect(got.getValue(0).getValue(2).getValue()).toBe(2)
 
-      expect(got.getKey(1).getValue()).toBe("lh2")
-      expect(got.getValue(1).getValue()).toBe(6)
-      expect(got.getValue(1).getUnit()).toBe("rem")
-
-      expect(got.getKey(2).getValue()).toBe("lh3")
-      expect(got.getValue(2).getValue()).toBe(6)
-      expect(got.getValue(1).getUnit()).toBe("rem")
-    })
+  })
 })

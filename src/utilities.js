@@ -14,50 +14,28 @@ export function getPropName(key) {
   return prop.prop
 }
 
-
-export function getStructuredValues(key, values) {
+export function createDefinitionData(key, values) {
   let prop = getProp(key)
+  let result = {}
 
-  if (!prop || !values || !Object.keys(values).length) {
-    return null
+  if (Array.isArray(values)) {
+    result.bidi = extractValues(prop.valueNames, values);
+  } else if (values.hasOwnProperty("ltr") && values.hasOwnProperty("rtl")) {
+    result.ltr = extractValues(prop.valueNames, values.ltr);
+    result.rtl = extractValues(prop.valueNames, values.rtl);
   }
 
-  if (values.hasOwnProperty("ltr") && values.hasOwnProperty("rtl")) {
-    if (typeof prop.valueNames === "string" && Array.isArray(values.ltr) && Array.isArray(values.rtl)) {
-      return createObjectArrayValue(prop, values);
-    } else if (Array.isArray(prop.valueNames)) {
-      return createArrayValue(prop, values);
-    } else {
-      return createObjectValue(prop, values);
-    }
+  return result
+
+  function extractValues(valueNames, values) {
+    let obj = {}
+    valueNames.forEach((vn, i) => {
+      obj[vn] = values[i] || values[values.length - 1]
+    })
+    return obj
   }
-  return createArrayValue(prop, values);
 }
 
 function getProp(key) {
   return modules.all.find(p => p.key === key);
-}
-
-function createObjectValue(prop, values) {
-  let obj = {ltr: {}, rtl: {}}
-  prop.valueNames.forEach((n, i) => {
-    obj.ltr[n] = values.ltr[i] || values.ltr[values.ltr.length - 1]
-    obj.rtl[n] = values.rtl[i] || values.ltr[values.ltr.length - 1]
-  })
-
-  return obj
-}
-
-function createObjectArrayValue(prop, values) {
-  let obj = {}
-  obj[prop.valueNames] = {ltr: values.ltr, rtl: values.rtl}
-  return obj
-}
-
-function createArrayValue(prop, values) {
-  let obj = {}
-  prop.valueNames.forEach((n, i) => {
-    obj[n] = values[i] || values[values.length - 1]
-  })
-  return obj
 }
