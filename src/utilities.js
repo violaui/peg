@@ -30,7 +30,11 @@ export function createDefinitionData(key, values) {
   function extractValues(valueNames, values) {
     let obj = {}
     valueNames.forEach((vn, i) => {
-      obj[vn] = values[i] || values[values.length - 1]
+      if (values[i] === 0) {
+        obj[vn] = 0
+      } else {
+        obj[vn] = values[i] || values[values.length - 1]
+      }
     })
     return obj
   }

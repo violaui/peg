@@ -119,11 +119,11 @@ describe("utilities.createDefinitionData", () => {
   test("given key: padding-start (complex prop), values as an array should return {bidi:{...}}", () => {
     const key = "padding-start"
     const values = [
-      {value: 0, unit: "rem"}, {value: 1, unit: "rem"}, {value: 1.8, unit: "rem"},{value: 2.4, unit: "rem"}
+      0, {value: 1, unit: "rem"}, {value: 1.8, unit: "rem"},{value: 2.4, unit: "rem"}
     ]
     const expected = {
       bidi: {
-        ps0: {value: 0, unit: "rem"},
+        ps0: 0,
         ps1: {value: 1, unit: "rem"},
         ps2: {value: 1.8, unit: "rem"},
         ps3: {value: 2.4, unit: "rem"},
