@@ -6,7 +6,7 @@ const secondaryFont = ["secondary"];
 const tertiaryFont = ["tertiary"];
 const codeFont = ["code"];
 const fontSizes = getRange(6, 1, 1, "f");
-const fontWeights = getRange(9, 1, 100, "fw");
+const fontWeights = ["thin", "light", "regular", "medium", "bold", "extra-bold", "black"].map(e => `f-${e}`);
 const fontStyles = ["i"];
 const textAligns = ["l", "r", "c", "j", "s", "e"].map(e => `t${e}`);
 const textTransformations = ["none", "cap", "low", "upp"].map(e => `tt-${e}`);
