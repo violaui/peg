@@ -56,14 +56,20 @@ function toSass(t) {
     if (isNumber(value)) {
       return toNumber(value.value, value.unit)
     }
-
+    if (isColor(value)) {
+      return toColor(value)
+    }
     let map = new t.Map(Object.keys(value).length)
     Object.keys(value)
       .map((k, i) => {
         map.setKey(i, toString(k))
-        map.setValue(i, toSassValue(value[k],"", commaSeparated))
+        map.setValue(i, toSassValue(value[k], "", commaSeparated))
       })
     return map
+  }
+
+  function toColor(value) {
+    return new t.Color(value.red, value.green, value.blue, value.alpha)
   }
 
   function toNull() {
@@ -74,6 +80,14 @@ function toSass(t) {
     return Object.keys(value).length === 2 &&
       value.hasOwnProperty("value") &&
       value.hasOwnProperty("unit");
+  }
+
+  function isColor(value) {
+    return Object.keys(value).length === 4 &&
+      value.hasOwnProperty("red") &&
+      value.hasOwnProperty("green") &&
+      value.hasOwnProperty("blue") &&
+      value.hasOwnProperty("alpha");
   }
 }
 

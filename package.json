@@ -1,6 +1,6 @@
 {
 	"name": "@violaui/peg",
-	"version": "0.2.3",
+	"version": "0.2.4",
 	"description": "A supplementary JavaScript code to play the Viola better.",
 	"main": "lib/index.js",
 	"unpkg": "lib/index.js",

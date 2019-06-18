@@ -95,6 +95,17 @@ describe("convert.toSass", () => {
 
   })
 
+  test("should convert special JS object {red:..., green:..., blue:..., alpha:...} to SASS Color", () => {
+    const value = {red: 100, green: 150, blue: 200, alpha: .7}
+    const got = convert.toSASS(value)
+
+    expect(got.constructor.name).toBe("SassColor")
+    expect(got.getR()).toBe(100)
+    expect(got.getG()).toBe(150)
+    expect(got.getB()).toBe(200)
+    expect(got.getA()).toBe(.7)
+  })
+
 })
 describe("convert.toJs", () => {
   test("should convert the given SASS Number to JS number", () => {
