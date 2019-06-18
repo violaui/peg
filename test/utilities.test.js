@@ -119,7 +119,7 @@ describe("utilities.createDefinitionData", () => {
   test("given key: padding-start (complex prop), values as an array should return {bidi:{...}}", () => {
     const key = "padding-start"
     const values = [
-      0, {value: 1, unit: "rem"}, {value: 1.8, unit: "rem"},{value: 2.4, unit: "rem"}
+      0, {value: 1, unit: "rem"}, {value: 1.8, unit: "rem"}, {value: 2.4, unit: "rem"}
     ]
     const expected = {
       bidi: {
@@ -135,6 +135,20 @@ describe("utilities.createDefinitionData", () => {
         ps9: {value: 2.4, unit: "rem"},
         ps10: {value: 2.4, unit: "rem"},
         ps11: {value: 2.4, unit: "rem"},
+      }
+    }
+    let got = utilities.createDefinitionData(key, values)
+    expect(got).toStrictEqual(expected)
+  })
+
+  test("given values are {ltr:[...], rtl:null}, should return {bidi:[...]}", () => {
+    const key = "text-indent"
+    const values = {ltr: [0, {value: 1.5, unit: "rem"}, {value: -1.5, unit: "rem"}], rtl: null}
+    const expected = {
+      bidi: {
+        "no-indent": 0,
+        indent: {value: 1.5, unit: "rem"},
+        outdent: {value: -1.5, unit: "rem"},
       }
     }
     let got = utilities.createDefinitionData(key, values)

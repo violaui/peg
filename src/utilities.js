@@ -20,7 +20,9 @@ export function createDefinitionData(key, values) {
 
   if (Array.isArray(values)) {
     result.bidi = extractValues(prop.valueNames, values);
-  } else if (values.hasOwnProperty("ltr") && values.hasOwnProperty("rtl")) {
+  } else if (values.hasOwnProperty("ltr") && values.hasOwnProperty("rtl") && !values.rtl) {
+    result.bidi = extractValues(prop.valueNames, values.ltr);
+  } else if (values.hasOwnProperty("ltr") && values.hasOwnProperty("rtl") && values.ltr && values.rtl) {
     result.ltr = extractValues(prop.valueNames, values.ltr);
     result.rtl = extractValues(prop.valueNames, values.rtl);
   }
