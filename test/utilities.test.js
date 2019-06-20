@@ -141,7 +141,7 @@ describe("utilities.createDefinitionData", () => {
     expect(got).toStrictEqual(expected)
   })
 
-  test("given values are {ltr:[...], rtl:null}, should return {bidi:[...]}", () => {
+  test("given values are {ltr:[...], rtl:null}, should return {bidi:{...}}", () => {
     const key = "text-indent"
     const values = {ltr: [0, {value: 1.5, unit: "rem"}, {value: -1.5, unit: "rem"}], rtl: null}
     const expected = {
@@ -149,6 +149,29 @@ describe("utilities.createDefinitionData", () => {
         "no-indent": 0,
         indent: {value: 1.5, unit: "rem"},
         outdent: {value: -1.5, unit: "rem"},
+      }
+    }
+    let got = utilities.createDefinitionData(key, values)
+    expect(got).toStrictEqual(expected)
+  })
+
+  test("given key: margin-x (array prop), should return {bidi:{...}", () => {
+    const key = "margin-x"
+    const values = [0, {value: 1, unit: "rem"}, {value: 2, unit: "rem"}, {value: 3, unit: "rem"}]
+    const expected = {
+      bidi: {
+        mx0: 0,
+        mx1: {value: 1, unit: "rem"},
+        mx2: {value: 2, unit: "rem"},
+        mx3: {value: 3, unit: "rem"},
+        mx4: {value: 3, unit: "rem"},
+        mx5: {value: 3, unit: "rem"},
+        mx6: {value: 3, unit: "rem"},
+        mx7: {value: 3, unit: "rem"},
+        mx8: {value: 3, unit: "rem"},
+        mx9: {value: 3, unit: "rem"},
+        mx10: {value: 3, unit: "rem"},
+        mx11: {value: 3, unit: "rem"},
       }
     }
     let got = utilities.createDefinitionData(key, values)
